@@ -3,6 +3,10 @@ from matplotlib import pyplot as plt
 
 from data import eye_messages
 
+# Simple frequency analysis.
+#
+# Writes some statistics to stdout
+# Displays a plot in a matplotlib window
 
 def main():
     bins = np.sum([np.bincount(i, minlength=83) for i in eye_messages], 0)

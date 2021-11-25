@@ -6,6 +6,9 @@ max_size = 25
 
 # Kasiski Analysis, kind of.
 #
+# Writes the ciphertexts with repeats underlined to out/repeats_out.html
+# Writes some statistics to stdout
+#
 # I am not too happy with how this one turned out. I had to hand-adjust the HTML
 # after pasting it into Google Docs, and the method I chose to find the longest repeats
 # kind of smells bad.
@@ -77,7 +80,7 @@ def output_html(repeats):
                 i += 1
         output.s += "\n\n"
         output.x = 0
-    with open("repeats_out.html", "w") as f:
+    with open("out/repeats_out.html", "w") as f:
         f.write("<html><pre>" + output.s + "</pre></html>")
 
 

@@ -4,6 +4,7 @@ from data import eye_messages
 
 max_size = 25
 
+
 # Kasiski Analysis, kind of.
 #
 # Writes the ciphertexts with repeats underlined to out/repeats_out.html
@@ -15,11 +16,11 @@ max_size = 25
 # Rewrites or refactors are welcome.
 
 
-def find_repeats():
+def find_repeats(msgs=eye_messages):
     # Keys in repeats are bytestrings, so we can use 'in' to check for substrings
     # Values in repeats are sets of positions, so we can easily discard repeats at the same position.
     repeats = defaultdict(set)
-    for m in eye_messages:
+    for m in msgs:
         for pos in range(len(m) - 1):
             for size in reversed(range(2, max_size)):
                 key = bytes(tuple(m[pos:pos + size]))
@@ -44,7 +45,7 @@ def find_repeats():
     return ret
 
 
-def output_html(repeats):
+def output_html(repeats, msgs=eye_messages, output_filename="out/repeats_out.html"):
     class _output:
         x = 0
         s = ""
@@ -66,7 +67,7 @@ def output_html(repeats):
                         self.s += " "
 
     output = _output()
-    for msgnum, m in enumerate(eye_messages):
+    for msgnum, m in enumerate(msgs):
         i = 0
         output.s += " " * 39 + f"{msgnum}\n"
         while i < len(m):
@@ -80,8 +81,18 @@ def output_html(repeats):
                 i += 1
         output.s += "\n\n"
         output.x = 0
-    with open("out/repeats_out.html", "w") as f:
+    with open(output_filename, "w") as f:
         f.write("<html><pre>" + output.s + "</pre></html>")
+
+
+def print_stats(repeats):
+    sorted_repeats = sorted([(s, p) for s, p in repeats.items()], key=lambda a: -len(a[1]))
+    repeat_counts = Counter()
+    for string, positions in sorted_repeats:
+        print(f"{string}: {sorted(positions)}")
+        repeat_counts[len(positions)] += 1
+    for n, c in repeat_counts.items():
+        print(f"{c} strings occur {n} times")
 
 
 def main():
@@ -89,14 +100,7 @@ def main():
 
     output_html(repeats)
 
-    sorted_repeats = sorted([(s, p) for s, p in repeats.items()], key=lambda a:-len(a[1]))
-    repeat_counts = Counter()
-    for string, positions in sorted_repeats:
-        print(f"{string}: {sorted(positions)}")
-        repeat_counts[len(positions)] += 1
-
-    for n, c in repeat_counts.items():
-        print(f"{c} strings occur {n} times")
+    print_stats(repeats)
 
 
 if __name__ == '__main__':

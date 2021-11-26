@@ -27,7 +27,7 @@ def main():
     plt.bar(x, results_y, 0.8, label="Coincidences per 1000")
     plt.plot(bounds, (66, 66), 'g', label="Expected (English)")
     plt.plot(bounds, (12, 12), 'r', label="Expected (Random)")
-    plt.xlabel("Period Length")
+    plt.xlabel("Offset")
     plt.ylabel("Count")
     plt.legend()
     plt.show()

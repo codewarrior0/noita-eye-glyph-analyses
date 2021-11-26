@@ -32,7 +32,7 @@ def main():
     msgs = [decrypt(m) for m in eye_messages]
 
     rep = repeats.find_repeats(msgs)
-    repeats.output_html(rep, msgs, "out/repeats_decr_out.html")
+    repeats.output_html(rep, msgs, "docs/repeats_decr_out.html")
     repeats.print_stats(rep)
 
 if __name__ == '__main__':

@@ -7,10 +7,10 @@ max_size = 25
 
 # Kasiski Analysis, kind of.
 #
-# Writes the ciphertexts with repeats underlined to out/repeats_out.html
+# Writes the ciphertexts with repeats underlined to docs/repeats_out.html
 # Writes some statistics to stdout
 #
-# I am not too happy with how this one turned out. I had to hand-adjust the HTML
+# I am not too happy with how this one turned docs. I had to hand-adjust the HTML
 # after pasting it into Google Docs, and the method I chose to find the longest repeats
 # kind of smells bad.
 # Rewrites or refactors are welcome.
@@ -45,7 +45,7 @@ def find_repeats(msgs=eye_messages):
     return ret
 
 
-def output_html(repeats, msgs=eye_messages, output_filename="out/repeats_out.html"):
+def output_html(repeats, msgs=eye_messages, output_filename="docs/repeats_out.html"):
     class _output:
         x = 0
         s = ""

@@ -82,7 +82,7 @@ def output_html(repeats, msgs=eye_messages, output_filename="out/repeats_out.htm
         output.s += "\n\n"
         output.x = 0
     with open(output_filename, "w") as f:
-        f.write("<html><pre>" + output.s + "</pre></html>")
+        f.write("<html><body><pre>" + output.s + "</pre></body></html>")
 
 
 def print_stats(repeats):

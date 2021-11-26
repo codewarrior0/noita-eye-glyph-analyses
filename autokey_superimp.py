@@ -1,14 +1,14 @@
-# Superimposition test for periodic ciphers
+# Superimposition test for auto-keying ciphers
 #
-# Superimposes each message against each other message, shifted by amounts ranging from 4 to 90, and
+# Superimposes each message against itself, shifted by amounts ranging from 1 to 40, and
 # displays a graph showing the number of coincidences for each shift amount.
 
 from matplotlib import pyplot as plt
 
-from tests import kappa_test
 from data import eye_messages
+from tests import kappa_test
 
-bounds = (4, 90)
+bounds = (1, 40)
 
 
 def main():
@@ -18,10 +18,9 @@ def main():
         matches = 0
         checks = 0
         for i in range(9):
-            for j in range(9):
-                match, check = kappa_test(eye_messages[i], eye_messages[j], w)
-                matches += match
-                checks += check
+            match, check = kappa_test(eye_messages[i], eye_messages[i], w)
+            matches += match
+            checks += check
 
         results_y.append(1000 * matches / checks)
 
@@ -32,6 +31,7 @@ def main():
     plt.ylabel("Count")
     plt.legend()
     plt.show()
+
 
 if __name__ == '__main__':
     main()
